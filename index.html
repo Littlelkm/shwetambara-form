@@ -287,14 +287,19 @@ function loadActivities() {
   if (ageGroup === "7to14") activities = ["X", "Y", "Z"];
   if (ageGroup === "adult") activities = ["J", "K", "L"];
 
+  // Regular activities
   activities.forEach(activity => {
     const label = document.createElement("label");
     label.innerHTML = `<input type="checkbox" name="activity" value="${activity}"> ${activity}`;
     container.appendChild(label);
   });
 
+  // Replace "Other" text here
   const otherLabel = document.createElement("label");
-  otherLabel.innerHTML = `<input type="checkbox" id="otherCheckbox" name="activity" value="Add Your Own"> Other`;
+  otherLabel.innerHTML = `
+    <input type="checkbox" id="otherCheckbox" name="activity" value="Other">
+    Anything else you would like to perform
+  `;
   container.appendChild(otherLabel);
 
   const otherInput = document.createElement("input");
@@ -379,6 +384,7 @@ document.getElementById("multiStepForm").addEventListener("submit", function(e) 
 
 </body>
 </html>
+
 
 
 
