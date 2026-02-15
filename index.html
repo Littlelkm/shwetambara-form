@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shwetambara</title>
 
-  <!-- Marathi Font Support -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
@@ -38,13 +37,8 @@
       margin-bottom: 20px;
     }
 
-    .page {
-      display: none;
-    }
-
-    .active {
-      display: block;
-    }
+    .page { display: none; }
+    .active { display: block; }
 
     .invite-title {
       text-align: center;
@@ -64,9 +58,7 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
     }
 
-    .invite-box p {
-      margin-bottom: 12px;
-    }
+    .invite-box p { margin-bottom: 12px; }
 
     .marathi {
       font-family: 'Noto Sans Devanagari', sans-serif;
@@ -80,9 +72,7 @@
       background: #ddd;
     }
 
-    .form-group {
-      margin-bottom: 15px;
-    }
+    .form-group { margin-bottom: 15px; }
 
     label {
       display: block;
@@ -99,9 +89,7 @@
       font-size: 14px;
     }
 
-    textarea {
-      resize: vertical;
-    }
+    textarea { resize: vertical; }
 
     input[type="checkbox"] {
       width: auto;
@@ -121,7 +109,6 @@
       margin-top: 20px;
     }
 
-    /* First page only Next button aligned right */
     .page:first-child .buttons {
       justify-content: flex-end;
     }
@@ -136,9 +123,7 @@
       font-size: 14px;
     }
 
-    button:hover {
-      opacity: 0.9;
-    }
+    button:hover { opacity: 0.9; }
 
   </style>
 </head>
@@ -146,31 +131,25 @@
 <body>
 
 <div class="form-container">
-  <h2>Charkop Shwetambara CHS Ltd</h2>
+  <h2>Charkop Shwetambara</h2>
   <p class="sub-title">Celebrating Our First Step Together</p>
 
   <form id="multiStepForm">
 
     <!-- PAGE 1 -->
     <div class="page active">
-      <h2 class="invite-title">Cultural Events Invitation</h2>
-
+      <h2 class="invite-title">?? Cultural Events Invitation ??</h2>
       <div class="invite-box">
-
         <div>
-          <h4></h4>
+          <h4>English</h4>
           <p>Hello everyone,</p>
           <p>
             You are cordially invited to the cultural events taking place in our society,
-            <strong>"Charkop Shwetambara"</strong> on
+            <strong>“Charkop Shwetambara CHS Ltd”</strong> on
             <strong>27th & 28th February 2026</strong>.
           </p>
-          <p>
-            There will be games and exciting activities for people of all age groups.
-          </p>
-          <p>
-            Kindly fill out the form with the correct details to help us organize the event smoothly:)
-          </p>
+          <p>There will be games and exciting activities for people of all age groups.</p>
+          <p>Kindly fill out the form with the correct details to help us organize the event smoothly ??</p>
         </div>
 
         <hr>
@@ -191,7 +170,6 @@
             फॉर्म भरण्याची विनंती आहे.
           </p>
         </div>
-
       </div>
 
       <div class="buttons">
@@ -305,7 +283,6 @@ function loadActivities() {
   container.innerHTML = "";
 
   let activities = [];
-
   if (ageGroup === "upto6") activities = ["A", "B", "C"];
   if (ageGroup === "7to14") activities = ["X", "Y", "Z"];
   if (ageGroup === "adult") activities = ["J", "K", "L"];
@@ -315,19 +292,90 @@ function loadActivities() {
     label.innerHTML = `<input type="checkbox" name="activity" value="${activity}"> ${activity}`;
     container.appendChild(label);
   });
+
+  const otherLabel = document.createElement("label");
+  otherLabel.innerHTML = `<input type="checkbox" id="otherCheckbox" name="activity" value="Other"> Other`;
+  container.appendChild(otherLabel);
+
+  const otherInput = document.createElement("input");
+  otherInput.type = "text";
+  otherInput.id = "otherActivity";
+  otherInput.placeholder = "Please specify";
+  otherInput.style.display = "none";
+  otherInput.style.marginTop = "8px";
+  container.appendChild(otherInput);
+
+  document.getElementById("otherCheckbox").addEventListener("change", function() {
+    otherInput.style.display = this.checked ? "block" : "none";
+  });
 }
 
 function validatePage3() {
-  const activities = document.querySelectorAll("input[name='activity']:checked");
-  if (activities.length === 0) {
+  const selected = document.querySelectorAll("input[name='activity']:checked");
+  const otherChecked = document.getElementById("otherCheckbox");
+  const otherText = document.getElementById("otherActivity");
+
+  if (selected.length === 0) {
     alert("Please select at least one activity.");
     return;
   }
+
+  if (otherChecked && otherChecked.checked && otherText.value.trim() === "") {
+    alert("Please specify the Other activity.");
+    return;
+  }
+
   nextPage();
 }
+
+document.getElementById("multiStepForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const submitBtn = document.querySelector("button[type='submit']");
+  submitBtn.disabled = true;
+  submitBtn.innerText = "Submitting...";
+  submitBtn.style.backgroundColor = "#555";
+
+  const data = {
+    name: document.getElementById("name").value,
+    phone: document.getElementById("phone").value,
+    flat: document.getElementById("flat").value,
+    participantName: document.getElementById("participantName").value,
+    age: document.getElementById("age").value,
+    option: Array.from(document.querySelectorAll("input[name='activity']:checked"))
+      .map(el => el.value === "Other"
+        ? "Other: " + document.getElementById("otherActivity").value
+        : el.value)
+      .join(", "),
+    note: document.getElementById("note").value
+  };
+
+  fetch("https://script.google.com/macros/s/AKfycbxLW34vbMGiy-TxGDra_trrHzKenxy0DjZOLsKEV20F7nthCYmLh9p4i2yFTU8LzCm9vw/exec", {
+    method: "POST",
+    body: JSON.stringify(data)
+  })
+  .then(() => {
+    submitBtn.innerText = "Submitted ✓";
+    submitBtn.style.backgroundColor = "green";
+
+    setTimeout(() => {
+      alert("Form submitted successfully!");
+      document.getElementById("multiStepForm").reset();
+      submitBtn.disabled = false;
+      submitBtn.innerText = "Submit";
+      submitBtn.style.backgroundColor = "#8e2de2";
+      currentPage = 0;
+      showPage(currentPage);
+    }, 1200);
+  })
+  .catch(() => {
+    submitBtn.disabled = false;
+    submitBtn.innerText = "Submit";
+    submitBtn.style.backgroundColor = "#8e2de2";
+    alert("Error submitting form.");
+  });
+});
 </script>
 
 </body>
 </html>
-
-
