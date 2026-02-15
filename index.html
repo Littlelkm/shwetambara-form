@@ -288,6 +288,32 @@ button:hover {
         <button type="submit">Submit</button>
       </div>
     </div>
+<!-- PAGE 5 -->
+<div class="page">
+  <h2 class="invite-title">Thank You :)</h2>
+  <div class="invite-box">
+    <p>Dear Resident,</p>
+
+    <p>
+      Thank you for registering for the cultural events at
+      <strong>Charkop Shwetambara CHS Ltd</strong>.
+    </p>
+
+    <p>
+      We are excited to have you participate on
+      <strong>27th & 28th February 2026</strong>.
+    </p>
+
+    <p>
+      Your entry has been recorded successfully.  
+      We look forward to celebrating together:)
+    </p>
+  </div>
+
+  <div class="buttons">
+    <button type="button" onclick="goToStart()">Close</button>
+  </div>
+</div>
 
   </form>
 </div>
@@ -408,19 +434,20 @@ document.getElementById("multiStepForm").addEventListener("submit", function(e) 
     body: JSON.stringify(data)
   })
   .then(() => {
-    submitBtn.innerText = "Submitted ✓";
-    submitBtn.style.backgroundColor = "green";
+  submitBtn.innerText = "Submitted ✓";
+  submitBtn.style.backgroundColor = "green";
 
-    setTimeout(() => {
-      alert("Form submitted successfully!");
-      document.getElementById("multiStepForm").reset();
-      submitBtn.disabled = false;
-      submitBtn.innerText = "Submit";
-      submitBtn.style.backgroundColor = "#8e2de2";
-      currentPage = 0;
-      showPage(currentPage);
-    }, 1200);
-  })
+  setTimeout(() => {
+    document.getElementById("multiStepForm").reset();
+    submitBtn.disabled = false;
+    submitBtn.innerText = "Submit";
+    submitBtn.style.backgroundColor = "#8e2de2";
+
+    currentPage = 4;   // Page 5 index (0-based)
+    showPage(currentPage);
+  }, 800);
+})
+
   .catch(() => {
     submitBtn.disabled = false;
     submitBtn.innerText = "Submit";
@@ -428,10 +455,17 @@ document.getElementById("multiStepForm").addEventListener("submit", function(e) 
     alert("Error submitting form.");
   });
 });
+  
+  function goToStart() {
+  currentPage = 0;
+  showPage(currentPage);
+}
+
 </script>
 
 </body>
 </html>
+
 
 
 
