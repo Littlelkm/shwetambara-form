@@ -61,6 +61,19 @@
       resize: vertical;
     }
 
+    /* Checkbox styling fix */
+    input[type="checkbox"] {
+      width: auto;
+      margin-right: 8px;
+    }
+
+    .checkbox-group label {
+      display: flex;
+      align-items: center;
+      font-weight: normal;
+      margin-bottom: 8px;
+    }
+
     .buttons {
       display: flex;
       justify-content: space-between;
@@ -86,18 +99,6 @@
       font-size: 13px;
       margin-top: 5px;
     }
-/* Fix checkbox alignment */
-input[type="checkbox"] {
-  width: auto;
-  margin-right: 8px;
-}
-
-.checkbox-group label {
-  display: flex;
-  align-items: center;
-  font-weight: normal;
-  margin-bottom: 8px;
-}
   </style>
 </head>
 
@@ -144,8 +145,13 @@ input[type="checkbox"] {
       </div>
 
       <div class="form-group">
-        <label>Participant Age *</label>
-        <input type="number" id="age" min="1" required>
+        <label>Participant Age Group *</label>
+        <select id="age" required>
+          <option value="">-- Select --</option>
+          <option value="upto6">Up to 6</option>
+          <option value="7to14">7 to 14</option>
+          <option value="adult">Adult</option>
+        </select>
       </div>
 
       <div class="buttons">
@@ -159,14 +165,9 @@ input[type="checkbox"] {
       <h3></h3>
 
       <div class="form-group">
-  <label>Choose Activity *</label>
-
-  <div class="checkbox-group">
-    <label><input type="checkbox" name="activity" value="Dance"> Dance</label>
-    <label><input type="checkbox" name="activity" value="Race"> Race</label>
-    <label><input type="checkbox" name="activity" value="Carrom"> Carrom</label>
-  </div>
-</div>
+        <label>Choose Activity *</label>
+        <div class="checkbox-group" id="activityContainer"></div>
+      </div>
 
       <div class="buttons">
         <button type="button" onclick="prevPage()">Back</button>
@@ -231,7 +232,7 @@ function validatePage2() {
   const phone = document.getElementById("phone").value.trim();
   const flat = document.getElementById("flat").value.trim();
   const participantName = document.getElementById("participantName").value.trim();
-  const age = document.getElementById("age").value.trim();
+  const age = document.getElementById("age").value;
 
   if (!name || !phone || !flat || !participantName || !age) {
     alert("Please fill all required fields.");
@@ -243,7 +244,30 @@ function validatePage2() {
     return;
   }
 
+  loadActivities();
   nextPage();
+}
+
+function loadActivities() {
+  const ageGroup = document.getElementById("age").value;
+  const container = document.getElementById("activityContainer");
+  container.innerHTML = "";
+
+  let activities = [];
+
+  if (ageGroup === "upto6") {
+    activities = ["A", "B", "C"];
+  } else if (ageGroup === "7to14") {
+    activities = ["X", "Y", "Z"];
+  } else if (ageGroup === "adult") {
+    activities = ["J", "K", "L"];
+  }
+
+  activities.forEach(activity => {
+    const label = document.createElement("label");
+    label.innerHTML = `<input type="checkbox" name="activity" value="${activity}"> ${activity}`;
+    container.appendChild(label);
+  });
 }
 
 function validatePage3() {
