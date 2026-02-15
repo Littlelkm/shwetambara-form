@@ -248,14 +248,16 @@ button:hover {
       </div>
 
       <div class="form-group">
-        <label>Participant Age Group *</label>
-        <select id="age" required>
-          <option value="">-- Select --</option>
-          <option value="upto6">Up to 6</option>
-          <option value="7to14">7 to 14</option>
-          <option value="adult">Adult</option>
-        </select>
-      </div>
+  <label>Participant Age Group *</label>
+  <select id="age" required>
+    <option value="">-- Select --</option>
+    <option value="upto6">Children Up to age 6</option>
+    <option value="7to14">Between 7 to 14</option>
+    <option value="gents">Gents</option>
+    <option value="ladies">Ladies</option>
+  </select>
+</div>
+
 
       <div class="buttons">
         <button type="button" onclick="prevPage()">Back</button>
@@ -359,7 +361,9 @@ function loadActivities() {
   let activities = [];
   if (ageGroup === "upto6") activities = ["A", "B", "C"];
   if (ageGroup === "7to14") activities = ["X", "Y", "Z"];
-  if (ageGroup === "adult") activities = ["J", "K", "L"];
+  if (ageGroup === "gents") activities = ["J", "K", "L"];
+if (ageGroup === "ladies") activities = ["M", "N", "O"];
+
 
   // Regular activities
   activities.forEach(activity => {
@@ -465,6 +469,7 @@ document.getElementById("multiStepForm").addEventListener("submit", function(e) 
 
 </body>
 </html>
+
 
 
 
