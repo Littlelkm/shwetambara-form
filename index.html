@@ -1,8 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Shwetambara</title>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shwetambara</title>
+
+  <!-- Marathi Font Support -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
     body {
@@ -13,21 +17,25 @@
     }
 
     .form-container {
-      max-width: 500px;
+      max-width: 520px;
       background: #ffffff;
       padding: 25px;
       margin: auto;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
     }
 
     h2 {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 5px;
     }
 
-    h3 {
-      margin-bottom: 15px;
+    .sub-title {
+      text-align: center;
+      font-size: 14px;
+      color: #777;
+      margin-top: 0;
+      margin-bottom: 20px;
     }
 
     .page {
@@ -36,6 +44,40 @@
 
     .active {
       display: block;
+    }
+
+    .invite-title {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #8e2de2;
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .invite-box {
+      background: #f9f6ff;
+      padding: 20px;
+      border-radius: 12px;
+      line-height: 1.7;
+      font-size: 15px;
+      color: #333;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+    }
+
+    .invite-box p {
+      margin-bottom: 12px;
+    }
+
+    .marathi {
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      line-height: 1.9;
+    }
+
+    hr {
+      margin: 20px 0;
+      border: 0;
+      height: 1px;
+      background: #ddd;
     }
 
     .form-group {
@@ -61,7 +103,6 @@
       resize: vertical;
     }
 
-    /* Checkbox styling fix */
     input[type="checkbox"] {
       width: auto;
       margin-right: 8px;
@@ -80,25 +121,25 @@
       margin-top: 20px;
     }
 
+    /* First page only Next button aligned right */
+    .page:first-child .buttons {
+      justify-content: flex-end;
+    }
+
     button {
-      padding: 10px 18px;
+      background-color: #8e2de2;
+      color: white;
       border: none;
+      padding: 9px 18px;
       border-radius: 6px;
       cursor: pointer;
-      background: #2c3e50;
-      color: white;
       font-size: 14px;
     }
 
     button:hover {
-      background: #34495e;
+      opacity: 0.9;
     }
 
-    .error-text {
-      color: red;
-      font-size: 13px;
-      margin-top: 5px;
-    }
   </style>
 </head>
 
@@ -106,23 +147,60 @@
 
 <div class="form-container">
   <h2>Shwetambara</h2>
+  <p class="sub-title">Charkop Shwetambara CHS Ltd</p>
 
   <form id="multiStepForm">
 
     <!-- PAGE 1 -->
     <div class="page active">
-      <h3>Please Read</h3>
-      <p>This form is for registration purposes. Please fill in all required details carefully.</p>
+      <h2 class="invite-title">🎉 Cultural Events Invitation 🎉</h2>
+
+      <div class="invite-box">
+
+        <div>
+          <h4>English</h4>
+          <p>Hello everyone,</p>
+          <p>
+            You are cordially invited to the cultural events taking place in our society,
+            <strong>“Charkop Shwetambara CHS Ltd”</strong> on
+            <strong>27th & 28th February 2026</strong>.
+          </p>
+          <p>
+            There will be games and exciting activities for people of all age groups.
+          </p>
+          <p>
+            Kindly fill out the form with the correct details to help us organize the event smoothly 🙂
+          </p>
+        </div>
+
+        <hr>
+
+        <div class="marathi">
+          <h4>मराठी</h4>
+          <p>सर्वांना नमस्कार,</p>
+          <p>
+            आमच्या <strong>'चारकोप श्वेतांबर सीएचएस लिमिटेड'</strong> सोसायटीमध्ये
+            <strong>२७ आणि २८ फेब्रुवारी २०२६</strong> रोजी होणाऱ्या
+            सांस्कृतिक कार्यक्रमांसाठी तुमचे मनापासून स्वागत आहे.
+          </p>
+          <p>
+            सर्व वयोगटातील लोकांसाठी खेळ आणि इतर उपक्रम असतील.
+          </p>
+          <p>
+            कार्यक्रम सुरळीत पार पडावा यासाठी तुम्हाला योग्य माहितीसह
+            फॉर्म भरण्याची विनंती आहे.
+          </p>
+        </div>
+
+      </div>
+
       <div class="buttons">
-        <span></span>
         <button type="button" onclick="nextPage()">Next</button>
       </div>
     </div>
 
     <!-- PAGE 2 -->
     <div class="page">
-      <h3></h3>
-
       <div class="form-group">
         <label>Your Name *</label>
         <input type="text" id="name" required>
@@ -130,8 +208,7 @@
 
       <div class="form-group">
         <label>Phone Number (10 digits) *</label>
-        <input type="tel" id="phone" maxlength="10" pattern="[0-9]{10}" required>
-        <div class="error-text" id="phoneError"></div>
+        <input type="tel" id="phone" maxlength="10" required>
       </div>
 
       <div class="form-group">
@@ -162,8 +239,6 @@
 
     <!-- PAGE 3 -->
     <div class="page">
-      <h3></h3>
-
       <div class="form-group">
         <label>Choose Activity *</label>
         <div class="checkbox-group" id="activityContainer"></div>
@@ -177,23 +252,10 @@
 
     <!-- PAGE 4 -->
     <div class="page">
-      <h3></h3>
-
       <div class="form-group">
         <label>Additional comments?</label>
         <textarea id="note" rows="4"></textarea>
       </div>
-
-      <div class="buttons">
-        <button type="button" onclick="prevPage()">Back</button>
-        <button type="button" onclick="nextPage()">Next</button>
-      </div>
-    </div>
-
-    <!-- PAGE 5 -->
-    <div class="page">
-      <h3></h3>
-      <p>Society notes</p>
 
       <div class="buttons">
         <button type="button" onclick="prevPage()">Back</button>
@@ -228,22 +290,11 @@ function prevPage() {
 }
 
 function validatePage2() {
-  const name = document.getElementById("name").value.trim();
   const phone = document.getElementById("phone").value.trim();
-  const flat = document.getElementById("flat").value.trim();
-  const participantName = document.getElementById("participantName").value.trim();
-  const age = document.getElementById("age").value;
-
-  if (!name || !phone || !flat || !participantName || !age) {
-    alert("Please fill all required fields.");
-    return;
-  }
-
   if (!/^[0-9]{10}$/.test(phone)) {
     alert("Phone number must be exactly 10 digits.");
     return;
   }
-
   loadActivities();
   nextPage();
 }
@@ -255,13 +306,9 @@ function loadActivities() {
 
   let activities = [];
 
-  if (ageGroup === "upto6") {
-    activities = ["A", "B", "C"];
-  } else if (ageGroup === "7to14") {
-    activities = ["X", "Y", "Z"];
-  } else if (ageGroup === "adult") {
-    activities = ["J", "K", "L"];
-  }
+  if (ageGroup === "upto6") activities = ["A", "B", "C"];
+  if (ageGroup === "7to14") activities = ["X", "Y", "Z"];
+  if (ageGroup === "adult") activities = ["J", "K", "L"];
 
   activities.forEach(activity => {
     const label = document.createElement("label");
@@ -272,59 +319,12 @@ function loadActivities() {
 
 function validatePage3() {
   const activities = document.querySelectorAll("input[name='activity']:checked");
-
   if (activities.length === 0) {
     alert("Please select at least one activity.");
     return;
   }
-
   nextPage();
 }
-
-document.getElementById("multiStepForm").addEventListener("submit", function(e) {
-  e.preventDefault();
-
-  const submitBtn = document.querySelector("button[type='submit']");
-  submitBtn.disabled = true;
-  submitBtn.innerText = "Submitting...";
-
-  const data = {
-    name: document.getElementById("name").value,
-    phone: document.getElementById("phone").value,
-    flat: document.getElementById("flat").value,
-    participantName: document.getElementById("participantName").value,
-    age: document.getElementById("age").value,
-    option: Array.from(document.querySelectorAll("input[name='activity']:checked"))
-            .map(el => el.value)
-            .join(", "),
-    note: document.getElementById("note").value
-  };
-
-  fetch("https://script.google.com/macros/s/AKfycbxnh2D2zqyUfeojawbzs8tOGz1ChM7f5GDerS_6qjZfIoTJE4GHognPZV_YA8IBS9Y1Tw/exec", {
-    method: "POST",
-    body: JSON.stringify(data)
-  })
-  .then(() => {
-    submitBtn.innerText = "Submitted";
-    submitBtn.style.backgroundColor = "green";
-
-    setTimeout(() => {
-      alert("Form submitted successfully!");
-      document.getElementById("multiStepForm").reset();
-      submitBtn.disabled = false;
-      submitBtn.innerText = "Submit";
-      submitBtn.style.backgroundColor = "#2c3e50";
-      currentPage = 0;
-      showPage(currentPage);
-    }, 1000);
-  })
-  .catch(error => {
-    console.error(error);
-    submitBtn.disabled = false;
-    submitBtn.innerText = "Submit";
-    alert("Error submitting form. Check script deployment.");
-  });
-});
 </script>
 
 </body>
